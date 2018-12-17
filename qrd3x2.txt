@@ -1,0 +1,85 @@
+Disp "QRD 3x2"
+Disp "Arguments:"
+Disp "[A] = [A]"
+Prompt [A]
+
+Pause "Press ENTER"
+
+{3,1}->dim([B])
+{3,1}->dim([C])
+
+For(R,1,3)
+[A](R,1)->[B](R,1)
+[A](R,2)->[C](R,1)
+End
+
+Disp "W_1:",[B]>Frac
+
+Pause "Press ENTER"
+
+sqrt([B](1,1)^^2+[B](2,1)^^2+[B](3,1)^^2)->B
+Disp "m[|a]g(W_1):",B
+
+Pause "Press ENTER"
+
+For(R,1,3)
+[B](R,1)/B->[B](R,1)
+End
+
+Disp "q_1:",[B]>Frac
+
+Pause "Press ENTER"
+
+{1,1}->dim([D])
+[B]^^T*[C]->[D]
+
+[D](1,1)->A
+
+Disp "q_1^T*a_2:",A
+
+Pause "Press ENTER"
+
+{3,1}->dim([D])
+[C]-(A*[B])->[D]
+
+Disp "W_2: ",[D]
+
+Pause "Press ENTER"
+
+sqrt([D](1,1)^^2+[D](2,1)^^2+[D](3,1)^^2)->D
+Disp "mag(w_2):",D
+
+Pause "Press ENTER"
+
+For(R,1,3)
+[D](R,1)/D->[D](R,1)
+End
+
+Disp "q_2:",[D]>Frac
+
+Pause "Press ENTER"
+
+Disp "Build Q and R:"
+
+For(R,1,3)
+For(C,1,2)
+If C=1
+Then
+[B](R,1)->[A](R,C)
+Else
+[D](R,1)->[A](R,C)
+End
+End
+End
+
+Disp "q:",[A]>Frac
+
+Pause "Press ENTER"
+
+{2,2}->dim([B])
+B->[B](1,1)
+A->[B](1,2)
+0->[B](2,1)
+D->[B](2,2)
+
+Disp "R:",[B]

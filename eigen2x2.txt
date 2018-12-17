@@ -1,0 +1,116 @@
+ClrHome
+Disp "Eigen Decomp 2x2"
+Disp "Arguments:"
+Disp "[A] = [A]"
+Prompt [A]
+
+ClrHome
+
+Disp "1. Find eigenval"
+Disp "Find roots of:"
+
+"0 = X^2 + BX + C"
+"B = B"
+"C = C"
+[A](1,1)*[A](2,2)-[A](1,2)*[A](2,1)->B
+[A](1,1)*(1-2)-[A](2,2)->C
+
+"Str1 = B"
+{0,1→L₁
+BL₁→L₂
+LinReg(ax+b) Y₁
+Equ►String(Y₁,Str1
+sub(Str1,1,length(Str1)-3→Str1
+
+"Str2 = C"
+{0,1→L₁
+CL₁→L₂
+LinReg(ax+b) Y₁
+Equ►String(Y₁,Str2
+sub(Str2,1,length(Str2)-3→Str2
+
+Disp "0 = X^2 + "+Str1+" + "+Str2
+
+Pause "ENTER when done"
+
+ClrHome
+Disp "2. Find eigenvec"
+
+"D = lambda_1"
+"E = lambda_2"
+Disp "Enter the roots"
+Disp "Greatest->Least"
+Prompt D,E
+
+"[B] calculate C_1"
+"[C] calculate C_2"
+{2,2}->dim([B])
+{2,2}->dim([C])
+
+[A](1,1)-D->[B](1,1)
+[A](2,2)-D->[B](2,2)
+[A](1,2)->[B](2,1)
+[A](2,1)->[B](2,1)
+
+[A](1,1)-E->[C](1,1)
+[A](2,2)-E->[C](2,2)
+[A](1,2)->[C](2,1)
+[A](2,1)->[C](2,1)
+
+Disp "Lambda_1:",D
+Pause "Press ENTER"
+
+Disp "C_1:",[B]
+Pause "Press ENTER"
+
+"[B] = rref(C_1)"
+rref([B])->[B]
+
+Disp "RREF:",[B]
+Pause "Press ENTER"
+
+"[D] = v_1"
+{2,1}->dim([D])
+abs([B](1,2))->[D](1,1)
+[B](1,1)->[D](2,1)
+
+Disp "v_1:",[D]
+Pause "Press ENTER"
+
+ClrHome
+Disp "Lambda_2:",E
+Pause "Press ENTER"
+
+Disp "C_2:",[C]
+Pause "Press ENTER"
+
+"[C] = rref(C_2)"
+rref([C])->[C]
+
+Disp "RREF:",[C]
+
+"[E] = v_2"
+{2,1}->dim([E])
+abs([C](1,2))->[E](1,1)
+[C](1,1)->[E](2,1)
+
+Disp "v_2:",[E]
+Pause "Press ENTER"
+
+ClrHome
+Disp "3. Build Lambda"
+
+"[F] = Lambda"
+{2,2}->dim([F])
+0->[F](1,2)
+0->[F](2,1)
+D->[F](1,1)
+E->[F](2,2)
+
+Disp "*Lambda in [F]*"
+Disp "Lambda:",[F]
+Pause "Press ENTER"
+
+ClrHome
+Disp "4. Build V"
+
